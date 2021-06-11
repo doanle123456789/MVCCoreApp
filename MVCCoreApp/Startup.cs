@@ -23,8 +23,8 @@ namespace MVCCoreApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc();
-            services.AddMvc(option => option.EnableEndpointRouting = false)
+            services.AddControllersWithViews();
+            //services.AddRazorPages();
 
 
         }
@@ -37,29 +37,19 @@ namespace MVCCoreApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
 
-            //else
-            //{
-            //    app.UseExceptionHandler("/Error");
-            //}
-
-            //app.UseStaticFiles();
-
-            //app.UseRouting();
-
+            app.UseRouting();
+            //app.UseAuthentication();
             //app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapRazorPages();
-            //});
 
-
-            //app.UseMvc(routes => 
-            //{
-            //    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            // app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id:int?}");
+                //endpoints.MapRazorPages();
+            });
         }
     }
 }
